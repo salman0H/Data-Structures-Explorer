@@ -1,5 +1,27 @@
 # depslib dependency file v1.0
-1733993127 source:d:\3.myproject\2.c++\data structure test code\main.cpp
+1733995536 source:d:\3.myproject\2.c++\data structure test code\main.cpp
 	<iostream>
 	<string>
+	"stack.h"
+	"queue.h"
+	"circularQueue.h"
+	"node.h"
+	"singlyLinkedList.h"
+
+1733995440 d:\3.myproject\2.c++\data structure test code\queue.h
+	<iostream>
+	<string>
+
+1733995426 d:\3.myproject\2.c++\data structure test code\circularqueue.h
+	<iostream>
+	<string>
+
+1733995322 d:\3.myproject\2.c++\data structure test code\node.h
+	<iostream>
+	<string>
+
+1733995413 d:\3.myproject\2.c++\data structure test code\singlylinkedlist.h
+	<iostream>
+	<string>
+	"node.h"
 
