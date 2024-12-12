@@ -26,7 +26,7 @@ public:
     {
         if(isFull())
         {
-            cout << endl << "stack overflow" << endl;
+            cout << "stack overflow" << endl;
         }
         else
         {
@@ -38,7 +38,7 @@ public:
     {
         if(isEmpty())
         {
-            cout << endl << "stack overflow" << endl;
+            cout << "stack overflow" << endl;
             return 0;
         }
         else
@@ -51,13 +51,13 @@ public:
     }
     int countStack()
     {
-        return (top++);
+        return (top + 1);
     }
     int peek()
     {
         if(isEmpty())
         {
-            cout << endl << "stack is empty" << endl;
+            cout << "stack is empty" << endl;
             return 0;
         }
         else
@@ -67,7 +67,7 @@ public:
     }
     void display()
     {
-        cout << endl << "all value in the stack are" << endl;
+        cout << "all value in the stack are" << endl;
         cout << " ---------------" << endl;
         for(int i=4;i>=0;i--)
         {
@@ -110,7 +110,7 @@ public:
     {
         if(isFull())
         {
-            cout << endl << "queue is FULL" << endl;
+            cout << "queue is FULL" << endl;
             return;
         }
         else if(isEmpty()) ///why add rear and front? frint --> first one
@@ -134,7 +134,7 @@ public:
         int popValue = 0;
         if(isEmpty())
         {
-            cout << endl << "queue EMPTY" << endl;
+            cout << "queue EMPTY" << endl;
             return 0;
         }
         else if(front == rear)
@@ -155,7 +155,7 @@ public:
     }
     void display()
     {
-        cout << endl << "all the value in th queue are" << endl;
+        cout << "all the value in th queue are" << endl;
         cout << " rear ";
         for(int i=4;i>=0;i--)
         {
@@ -199,7 +199,7 @@ public:
     {
         if(isFull())
         {
-            cout << endl << "queue is FULL" << endl;
+            cout << "queue is FULL" << endl;
             return;
         }
         else if(isEmpty()) ///why add rear and front? frint --> first one
@@ -225,7 +225,7 @@ public:
         int popValue = 0;
         if(isEmpty())
         {
-            cout << endl << "queue EMPTY" << endl;
+            cout << "queue EMPTY" << endl;
             return 0;
         }
         else if(front == rear)
@@ -252,7 +252,7 @@ public:
     }
     void display()
     {
-        cout << endl << "all the value in th queue are" << endl;
+        cout << "all the value in th queue are" << endl;
         cout << " rear ";
         for(int i=4;i>=0;i--)
         {
@@ -274,15 +274,293 @@ private:
     int itemCount;
 };
 
+class node
+{
+public:
+    node()
+    {
+        key = 0;
+        data = 0;
+        next = NULL;
+    }
+    node(int _key, int _data)
+    {
+        key = _key;
+        data = _data;
+    }
+    int getKey()
+    {
+        return key;
+    }
+    int& getData()
+    {
+        return data;
+    }
+    node*& getNext()
+    {
+        return next;
+    }
+private:
+    int key;
+    int data;
+    node *next;
+};
+
 class singlyLinkedList
 {
 public:
-private:
+    singlyLinkedList()
+    {
+        head = NULL;
+    }
+    singlyLinkedList(node *_head)
+    {
+        head = _head;
+    }
+    ///check node exists
+    node* nodeExists(int k)
+    {
+        node *temp = NULL;
+        node *ptr = head;
 
+        while(ptr != NULL)
+        {
+            if(ptr -> getKey() == k)
+            {
+                temp = ptr;
+            }
+            ptr = ptr -> getNext();
+        }
+        return temp;
+    }
+    ///append a new node
+    void appendNode(node *n)
+    {
+        if(nodeExists(n -> getKey() != NULL))
+        {
+           cout << "Node already exist with key value :"
+                << n -> getKey() << ". append another node with different key value"<< endl;
+        }
+        else
+        {
+            if(head == NULL)
+            {
+                head  = n;
+                cout << "Node appended." << endl;
+            }
+            else if(head != NULL)
+            {
+                node *ptr = head;
+                while((ptr -> getNext()) != NULL)
+                {
+                    ptr = ptr -> getNext();
+                }
+                ptr -> getNext() = n;
+                cout << "Node appended." << endl;
+            }
+        }
+    }
+    ///prepend node - attach a node at the start
+    void prependNode(node *n)
+    {
+        if(nodeExists((n -> getKey()) != NULL))
+        {
+           cout << "Node already exist with key value :"
+                << n -> getKey() << ". append another node with different key value"<< endl;
+        }
+        else
+        {
+            n -> getNext() = head;
+            head = n;
+            cout << "Node prepended." << endl;
+        }
+    }
+    ///insert a node after a particular node in the list
+    void insertNodeAfter(int k, node *n)
+    {
+        node *ptr = nodeExists(k);
+        if(ptr == NULL)
+        {
+            cout << "No node exist with this value : " << k << endl;
+        }
+        else
+        {
+            if(nodeExists(n -> getKey() != NULL))
+            {
+                cout << "Node already exist with key value : " << n -> getKey()
+                     << ". append another node with different key value" << endl;
+            }
+            else
+            {
+                n -> getNext() = ptr -> getNext();
+                ptr -> getNext() = n;
+                cout << "Node inserted." << endl;
+            }
+        }
+    }
+    ///delete node by unique key
+    void deleteNodeByKey(int k)
+    {
+        if(head == NULL)
+        {
+            cout << "Singly linked list is already empty. can't delete." << endl;
+        }
+        else if(head != NULL)
+        {
+            if(head -> getKey() == k)
+            {
+                head = head -> getNext();
+                cout << "Node unlinked with key value : " << k << endl;
+            }
+            else
+            {
+                node *temp = NULL;
+                node *prevptr = head;
+                node * currentptr = head -> getNext();
+                while(currentptr != NULL)
+                {
+                    if(currentptr -> getKey() == k)
+                    {
+                        temp = currentptr;
+                        currentptr = NULL;
+                    }
+                    else
+                    {
+                        prevptr = prevptr -> getNext();
+                        currentptr = currentptr -> getNext();
+                    }
+                }
+                if(temp != NULL)
+                {
+                    prevptr -> getNext() = temp -> getNext();
+                    delete temp;
+                    cout << "Node unlinked with key value : " << k << endl;
+                }
+                else
+                {
+                    cout << "Node doesn't exist with key value : " << k << endl;
+                }
+
+            }
+        }
+    }
+    ///update node
+    void updateNodeByKey(int k, int d)
+    {
+        node *ptr = nodeExists(k);
+        if(ptr != NULL)
+        {
+            ptr -> getData() = d;
+            cout << "Node data update successfully." << endl;
+        }
+        else
+        {
+            cout << "Node doesn't exist with key value : " << k << endl;
+        }
+    }
+    ///display
+    void display()
+    {
+        if(head == NULL)
+        {
+            cout << "Singly linked list is empty." << endl;
+        }
+        else
+        {
+            cout << "Singly linked list values : " << endl;
+            node *temp = head;
+            int counter = 0;
+            while(temp != NULL && counter < 1000)
+            {
+                cout << '(' << temp -> getKey() << ',' << temp -> getData() << ')'
+                     << " --> ";
+                temp = temp -> getNext();
+                counter++;
+            }
+            if (counter >= 1000) {
+                cout << "Error: Loop detected or too many nodes in the list." << endl;
+            } else {
+                cout << "NULL" << endl; // نشان دادن انتهای لیست
+            }
+        }
+    }
+private:
+    node *head;
 };
 int main()
 {
-    int select;
+    singlyLinkedList sll;
+    int option, key, data, afterKey;
+
+    do {
+        cout << "\n=== Singly Linked List Menu ===\n";
+        cout << "1. Append Node\n";
+        cout << "2. Prepend Node\n";
+        cout << "3. Insert Node After\n";
+        cout << "4. Delete Node By Key\n";
+        cout << "5. Update Node By Key\n";
+        cout << "6. Display List\n";
+        cout << "7. Exit\n";
+        cout << "Choose an option: ";
+        cin >> option;
+
+        switch (option) {
+        case 1:
+            cout << "Enter key and data of the node to append: ";
+            cin >> key >> data;
+            cout << "[DEBUG] Append Node: key=" << key << ", data=" << data << endl;
+            sll.appendNode(new node(key, data));
+            break;
+
+        case 2:
+            cout << "Enter key and data of the node to prepend: ";
+            cin >> key >> data;
+            cout << "[DEBUG] Prepend Node: key=" << key << ", data=" << data << endl;
+            sll.prependNode(new node(key, data));
+            break;
+
+        case 3:
+            cout << "Enter the key of the node after which to insert: ";
+            cin >> afterKey;
+            cout << "Enter key and data of the new node: ";
+            cin >> key >> data;
+            cout << "[DEBUG] Insert Node After: afterKey=" << afterKey << ", key=" << key << ", data=" << data << endl;
+            sll.insertNodeAfter(afterKey, new node(key, data));
+            break;
+
+        case 4:
+            cout << "Enter the key of the node to delete: ";
+            cin >> key;
+            cout << "[DEBUG] Delete Node By Key: key=" << key << endl;
+            sll.deleteNodeByKey(key);
+            break;
+
+        case 5:
+            cout << "Enter the key of the node to update: ";
+            cin >> key;
+            cout << "Enter new data for the node: ";
+            cin >> data;
+            cout << "[DEBUG] Update Node By Key: key=" << key << ", new data=" << data << endl;
+            sll.updateNodeByKey(key, data);
+            break;
+
+        case 6:
+            cout << "[DEBUG] Display List\n";
+            sll.display();
+            break;
+
+        case 7:
+            cout << "Exiting program." << endl;
+            cout << "[DEBUG] Program Exit\n";
+            break;
+
+        default:
+            cout << "Invalid option. Please try again." << endl;
+            cout << "[DEBUG] Invalid Option Entered: " << option << endl;
+        }
+
+    } while (option != 7);
 
     return 0;
 }
+
